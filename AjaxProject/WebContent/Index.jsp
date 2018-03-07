@@ -16,9 +16,19 @@ Variabila din sesiune: <%= session.getAttribute("variabilaSesiune") == null ? ""
 <br>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
     <script type="text/javascript">
+    function update()
+    {
+        $('.chatlogs').children().last().focus();
+        $.post("Testare_1", { nrmesaje:$(".chatlogs").children().length},
+            function(responseText){
+                $('#output').append(responseText);
+            });
+        setTimeout('update()', 1000);
+    }
         $(document).ready(function() {
             $('#call').click(function ()
             {
+            	update();
                 $.ajax({
                     type: "post",
                     url: "Testare_1",   //this is my servlet
